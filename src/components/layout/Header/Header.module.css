@@ -1,0 +1,178 @@
+/* Общие стили */
+.headerTopBackground {
+  background-color: #020202;
+  height: 3rem;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 84%;
+  max-width: 1400px;
+}
+
+.headerTop {
+  font-size: 13px;
+  color: #a2a6b0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+}
+
+/* Часы работы */
+.headerSchedule {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+}
+
+.headerDays {
+  font-family: "Poppins", sans-serif;
+}
+
+.headerHours {
+  color: #fff;
+  padding-left: 3px;
+  font-weight: 600;
+}
+
+.headerScheduleIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.green {
+  background-color: #4caf50;
+}
+
+.red {
+  background-color: #e32323;
+}
+
+/* Локация */
+.headerLocation {
+  color: #acacac;
+}
+
+/* Контакты */
+.headerContactInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerContactLogo img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.headerContactInfo a {
+  text-decoration: none;
+}
+
+.headerContact {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 4px;
+  position: relative;
+  text-decoration: none;
+}
+
+.headerContact::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 4px;
+  bottom: -5px;
+  height: 2.5px;
+  background-color: currentColor;
+}
+
+.headerPhone {
+  color: white;
+  font-weight: 600;
+}
+
+.headerContactLogo img {
+  flex-shrink: 0;
+  width: 20px;
+  height: auto;
+}
+
+/* Основная навигация */
+.headerNav {
+  border-bottom: 1px solid #eee;
+}
+
+.headerNavContainer {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Логотип */
+.headerLogo {
+  margin-right: 40px;
+}
+
+.headerLogo img {
+  width: 35px;
+  height: auto;
+}
+
+/* Меню */
+.headerMenu {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+  justify-content: flex-start;
+}
+
+.headerMenuItem {
+  text-align: center;
+}
+
+.headerMenuLink {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  padding: 12px 0;
+  font-size: 14px;
+  transition: color 0.3s;
+  display: inline-block;
+}
+
+.headerMenuLink:hover {
+  color: #007bff;
+}
+
+/* Особый пункт "Our Deals" */
+.menuItemDeals .headerMenuLink {
+  color: #007bff;
+  font-weight: 700;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  padding: 10px 20px;
+  line-height: 1;
+}
+
+/* Корзина */
+.headerUserActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.headerCart img {
+  width: 22px;
+  height: 20px;
+  vertical-align: middle;
+}

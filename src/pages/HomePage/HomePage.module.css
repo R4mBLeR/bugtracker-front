@@ -1,0 +1,26 @@
+.mainPage {
+  font-family: "Poppins", sans-serif;
+}
+
+.mainPageTitles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainPageProductsTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.mainPageNewProductsTitle a {
+  color: #0156ff;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 колонки равной ширины */
+  gap: 50px; /* расстояние между карточками */
+  padding: 20px;
+}
