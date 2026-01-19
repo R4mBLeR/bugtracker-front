@@ -1,11 +1,11 @@
 .App {
   text-align: center;
   background-color: rgb(16, 13, 13);
+  color: white;
 }
 
 .wrapper {
   margin: 0 auto;
-  height: 8rem;
   background-color: #141313;
   width: 84%;
   max-width: 1400px;

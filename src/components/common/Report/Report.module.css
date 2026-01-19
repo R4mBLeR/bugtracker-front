@@ -1,0 +1,61 @@
+.reportCard {
+  background: #1d1d1e;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  min-width: 700px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+}
+
+.id {
+  color: #8e8e93;
+  font-size: 0.9rem;
+  margin-right: 3px;
+}
+
+.status {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.open {
+  background: #ff3b3020;
+  color: #ff3b30;
+}
+
+.status.in-progress {
+  background: #007aff20;
+  color: #007aff;
+}
+
+.status.resolved {
+  background: #34c75920;
+  color: #34c759;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.senderEmail {
+  color: #8e8e93;
+  font-size: 0.7rem;
+  margin-right: 3px;
+}
