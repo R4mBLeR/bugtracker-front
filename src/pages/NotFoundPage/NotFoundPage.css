@@ -2,6 +2,7 @@
   height: 10rem;
   width: 100%;
   margin: auto;
+  color: white;
   display: flex;
   align-items: center; /* вертикальное центрирование */
   justify-content: center; /* горизонтальное центрирование */
