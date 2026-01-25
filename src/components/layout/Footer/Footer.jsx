@@ -1,13 +1,16 @@
-import React from 'react'
+import React from "react";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
-        <div className={styles.headerText}>Sign Up To Our Newsletter.</div>
-        <div className={styles.headerSmallText}>Be the first to hear about the latest offers.</div>
+      <div className={styles.headerText}>
+        Site made by R4mBLe_
+        <br />
+        Telegram: @radikevichM
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

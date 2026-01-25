@@ -1,0 +1,17 @@
+.changelogContainer {
+  width: 65%;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.changelogTitle {
+  font-weight: 600;
+  font-size: 24px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+
+.changelogInfo {
+  font-size: 15px;
+  margin-top: 10px;
+}

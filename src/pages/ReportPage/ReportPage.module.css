@@ -1,0 +1,38 @@
+.reportPage {
+  min-height: 1800px;
+}
+
+.reportCard {
+  background: #1d1d1e;
+  min-width: 700px;
+  margin: 0.5rem;
+  padding: 0.3rem;
+  text-align: left;
+  padding-left: 0.6rem;
+}
+
+.reportTitle {
+  font-weight: 600;
+  font-size: 36px;
+  margin: 0;
+}
+
+.reportFooter {
+  width: 100%;
+  color: grey;
+  font-size: 14px;
+}
+
+.reportId {
+  font-weight: 600;
+  font-size: 36px;
+  text-align: left;
+  margin: 0;
+  padding-left: 0.3rem;
+}
+
+.reportDescription {
+  margin-top: 0.5rem;
+  width: 80%;
+  margin-bottom: 0.1rem;
+}

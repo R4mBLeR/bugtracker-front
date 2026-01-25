@@ -5,12 +5,17 @@
 }
 
 .wrapper {
-  margin: 0 auto;
+  margin: auto;
+  padding: 0;
   background-color: #141313;
   width: 84%;
   max-width: 1400px;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

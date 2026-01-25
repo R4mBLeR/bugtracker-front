@@ -1,10 +1,9 @@
 .not-founded {
-  height: 10rem;
+  min-height: 1000px;
   width: 100%;
   margin: auto;
   color: white;
   display: flex;
-  align-items: center; /* вертикальное центрирование */
   justify-content: center; /* горизонтальное центрирование */
   font-size: 50px;
   text-decoration: solid;
