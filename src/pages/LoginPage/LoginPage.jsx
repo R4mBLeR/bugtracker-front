@@ -21,7 +21,7 @@ const LoginPage = () => {
       const result = await login(username, password);
 
       if (!result.success) {
-        setMessage(result.error || "Login failed");
+        setMessage("Incorrect username or password");
         return;
       }
       console.log("Login successful:", result.data);

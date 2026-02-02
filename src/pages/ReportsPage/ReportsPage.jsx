@@ -31,6 +31,10 @@ const ReportsPage = () => {
         setMessage("The report was sent successfully!");
         return;
       }
+      if (response.status === 409) {
+        setMessage("Something went wrong, please try later.");
+        return;
+      }
       if (!response.ok) {
         const body = await response.json();
         console.error("Send report error", body);
@@ -58,7 +62,6 @@ const ReportsPage = () => {
         }
 
         const reportsResponse = await response.json();
-        console.log("API Response:", reportsResponse);
 
         // Проверяем, что ответ - массив
         if (Array.isArray(reportsResponse)) {
