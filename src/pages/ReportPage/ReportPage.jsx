@@ -16,7 +16,7 @@ const ReportPage = () => {
     const fetchReport = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${API_URL}reports/${id}`);
+        const response = await fetch(`${API_URL}/reports/${id}`);
 
         if (response.status === 404) {
           navigate("/not-found", { replace: true });

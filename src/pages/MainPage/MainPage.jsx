@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchChangelogs = async () => {
       try {
-        const response = await fetch(API_URL + "changelogs");
+        const response = await fetch(API_URL + "/changelogs");
         if (response.ok) {
           const data = await response.json();
           setChangelogsData(Array.isArray(data) ? data : []);
@@ -35,7 +35,7 @@ const MainPage = () => {
 
     const fetchReports = async () => {
       try {
-        const response = await fetch(API_URL + "reports");
+        const response = await fetch(API_URL + "/reports");
         if (response.ok) {
           const data = await response.json();
           setReportsData(Array.isArray(data) ? data : []);

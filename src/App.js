@@ -7,9 +7,11 @@ import ReportPage from "./pages/ReportPage/ReportPage";
 import ReportsPage from "./pages/ReportsPage/ReportsPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <div className="App">
         <div className="wrapper">
@@ -25,6 +27,7 @@ function App() {
         </div>
       </div>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

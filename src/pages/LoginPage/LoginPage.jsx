@@ -1,42 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
-import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", { username, password });
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const result = await login(username, password);
+
+      if (!result.success) {
+        setMessage(result.error || "Login failed");
+        return;
+      }
+      console.log("Login successful:", result.data);
+      setUserName("");
+      setPassword("");
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error);
+      setMessage("Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>LOGIN</h2>
       <form onSubmit={handleSubmit} className={styles.inputForm}>
         <div className={styles.inputField}>
-          <label>Username:</label>
+          <label className={styles.label}>USERNAME</label>
           <input
-            type="username"
+            type="text"
             value={username}
             onChange={(e) => setUserName(e.target.value)}
             required
+            className={styles.input}
+            placeholder="Enter your username"
+            disabled={isLoading}
           />
         </div>
 
         <div className={styles.inputField}>
-          <label>Password:</label>
+          <label className={styles.label}>PASSWORD</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className={styles.input}
+            placeholder="Enter your password"
+            disabled={isLoading}
           />
         </div>
 
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          className={styles.loginButton}
+          disabled={isLoading}
+        >
+          {isLoading ? "LOGGING IN..." : "LOGIN"}
+        </button>
       </form>
+
+      {message && <div className={styles.message}>{message}</div>}
     </div>
   );
 };
