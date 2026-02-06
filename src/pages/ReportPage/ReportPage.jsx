@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./ReportPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import { useParams, useNavigate } from "react-router-dom";
-import Report from "../../components/common/Report/Report";
+import { useAuth } from "../../context/AuthContext";
 
 const ReportPage = () => {
   const { id } = useParams();
@@ -11,6 +11,7 @@ const ReportPage = () => {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
   const API_URL = process.env.REACT_APP_API_URL;
+  const {isAuthenticated} = useAuth();
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -65,6 +66,10 @@ const ReportPage = () => {
               <div className={styles.reportFooter}>{report.email}</div>
             </div>
           </div>
+        )}
+
+        {isAuthenticated && (
+            <div>Delete Report</div>
         )}
       </div>
     </div>

@@ -41,7 +41,7 @@ const LoginPage = () => {
       <h2 className={styles.title}>LOGIN</h2>
       <form onSubmit={handleSubmit} className={styles.inputForm}>
         <div className={styles.inputField}>
-          <label className={styles.label}>USERNAME</label>
+          <label className={styles.label}>Username: </label>
           <input
             type="text"
             value={username}
@@ -54,7 +54,7 @@ const LoginPage = () => {
         </div>
 
         <div className={styles.inputField}>
-          <label className={styles.label}>PASSWORD</label>
+          <label className={styles.label}>Password: </label>
           <input
             type="password"
             value={password}

@@ -23,5 +23,10 @@
 }
 .inputField {
   display: flex;
+  width: 100%;
   justify-content: space-between;
+}
+
+.inputField input {
+width: 63%;
 }
