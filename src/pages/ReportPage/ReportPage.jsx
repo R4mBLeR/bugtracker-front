@@ -1,4 +1,3 @@
-// ReportPage.jsx
 import React, { useEffect, useState } from "react";
 import styles from "./ReportPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
