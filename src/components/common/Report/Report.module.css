@@ -7,15 +7,18 @@ a {
   padding: 1rem;
   margin: 0.5rem 0;
   min-width: 700px;
+  border-radius: 10px;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
+
 }
 
 .container {
   display: flex;
+  gap: 7px;
 }
 
 .id {

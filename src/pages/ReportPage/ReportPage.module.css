@@ -36,3 +36,53 @@
   width: 80%;
   margin-bottom: 0.1rem;
 }
+
+.adminPanel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.3rem;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button{
+  display: flex;
+  width: 8rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-size: 15px;
+  color: white;
+  border-radius: 0.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton {
+  background-color: #8B0000;
+}
+
+.updateButton {
+  background-color: #ffa000;
+}
+
+.closeButton {
+  background-color: #1e5945;
+}
+.deleteButton:hover {
+  background-color: #480607;
+  cursor: pointer;
+}
+
+.updateButton:hover {
+  background-color: #cc5500;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #004524;
+  cursor: pointer;
+}
