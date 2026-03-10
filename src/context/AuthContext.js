@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ username, password }),
       };
       
-      const response = await fetch(`${API_URL}/login`, requestOptions);
+      const response = await fetch(`${API_URL}/auth/login`, requestOptions);
       
       if (response.status === 409) {
         return { success: false, error: "Incorrect username or password" };

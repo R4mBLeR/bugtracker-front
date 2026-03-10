@@ -64,7 +64,8 @@ const ReportPage = () => {
       };
       const response = await fetch(API_URL + "/reports", requestOptions);
     }
-    console.log(data);
+    console.log(response);
+    navigate('/');
 
   };
 
