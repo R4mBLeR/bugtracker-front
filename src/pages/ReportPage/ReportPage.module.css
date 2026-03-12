@@ -39,16 +39,24 @@
 
 .adminPanel {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.adminButtons {
+  display: flex;
   flex-direction: row;
   width: 100%;
   gap: 1rem;
   padding: 0.3rem;
   justify-content: center;
   align-items: center;
-
 }
 
-.button{
+.button {
   display: flex;
   width: 8rem;
   height: 3rem;
@@ -62,7 +70,7 @@
 }
 
 .deleteButton {
-  background-color: #8B0000;
+  background-color: #8b0000;
 }
 
 .updateButton {
@@ -85,4 +93,9 @@
 .closeButton:hover {
   background-color: #004524;
   cursor: pointer;
+}
+
+.adminMessage {
+  margin: auto;
+  font-size: 16px;
 }
