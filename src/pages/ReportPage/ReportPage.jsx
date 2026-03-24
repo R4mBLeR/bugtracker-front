@@ -3,6 +3,7 @@ import styles from "./ReportPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import useTitle from "../../hooks/useTitle";
 
 const ReportPage = () => {
   const { id } = useParams();
@@ -19,7 +20,10 @@ const ReportPage = () => {
     CLOSED: "closed",
   };
 
-  useEffect(() => {
+    useTitle('Report #' + id);
+
+
+    useEffect(() => {
     const fetchReport = async () => {
       try {
         setLoading(true);
@@ -114,7 +118,7 @@ const ReportPage = () => {
     return null;
   }
 
-  return (
+    return (
     <div className={styles.reportPage}>
       <div className={baseStyles.wrapper}>
         <div className={baseStyles.lineSeparator}></div>

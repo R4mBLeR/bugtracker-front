@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Report from "../../components/common/Report/Report";
 import styles from "./ReportsPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
+import useTitle from "../../hooks/useTitle";
 
 const ReportsPage = () => {
   const [reportsData, setReportsData] = useState([]);
@@ -15,7 +16,7 @@ const ReportsPage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
     setMessage("");
 
     try {
@@ -49,7 +50,10 @@ const ReportsPage = () => {
     }
   };
 
-  useEffect(() => {
+    useTitle('Reports');
+
+
+    useEffect(() => {
     const fetchData = async () => {
       try {
         setisLoading(true);

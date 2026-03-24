@@ -17,7 +17,7 @@ const Header = () => {
         <a href="/" className={styles.headerLogo}>
           <img src={companyLogo} alt="Company" />
         </a>
-        <div className={styles.gameName}>Game Name</div>
+        <div className={styles.gameName}>Nomo</div>
         <div className={styles.infoText}>by manyakasia</div>
       </div>
       <nav className={styles.navigation}>

@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AdminPanelPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import { useAuth } from "../../context/AuthContext";
+import {Helmet} from "react-helmet";
+import useTitle from "../../hooks/useTitle";
 
 const AdminPanelPage = () => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const AdminPanelPage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
 
   const { fetchWithAuth, isAuthenticated } = useAuth();
-
+  useTitle('Admin Panel');
   useEffect(() => {
     const checkAuth = setTimeout(() => {
       setIsCheckingAuth(false);
@@ -81,7 +83,6 @@ const AdminPanelPage = () => {
         error.message === "No refresh token available"
       ) {
         setMessage("Session expired. Please login again.");
-        // Перенаправляем на логин при ошибке авторизации
         setTimeout(() => navigate("/login"), 2000);
       } else {
         setMessage("Changelog failed. Please try again.");
@@ -93,8 +94,8 @@ const AdminPanelPage = () => {
 
   return (
     <div className={baseStyles.wrapper}>
-      <div className={styles.AdminPAnel}>
-        <div className={baseStyles.title}>AdminPanel</div>
+      <div className={styles.AdminPanel}>
+        <div className={baseStyles.title}>Admin Panel</div>
         <div className={baseStyles.lineSeparator}></div>
 
         <div className={styles.inputForm}>

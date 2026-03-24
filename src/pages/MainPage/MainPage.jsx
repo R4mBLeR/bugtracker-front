@@ -4,6 +4,7 @@ import styles from "./MainPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import photo from "../../assets/game-photo.jpg";
 import Changelog from "../../components/common/Changelog/Changelog";
+import useTitle from "../../hooks/useTitle";
 
 const MainPage = () => {
   const [changelogsData, setChangelogsData] = useState([]);
@@ -12,7 +13,10 @@ const MainPage = () => {
   const [error, setError] = useState(null);
   const API_URL = process.env.REACT_APP_API_URL;
 
-  useEffect(() => {
+    useTitle('Nomo');
+
+
+    useEffect(() => {
     const fetchChangelogs = async () => {
       try {
         const response = await fetch(API_URL + "/changelogs");

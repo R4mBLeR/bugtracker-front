@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import { useAuth } from "../../context/AuthContext";
+import useTitle from "../../hooks/useTitle";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
@@ -12,7 +13,9 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+    useTitle('Login');
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");

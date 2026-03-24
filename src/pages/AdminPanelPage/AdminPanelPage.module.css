@@ -13,7 +13,6 @@
   margin-bottom: 1rem;
 }
 
-/* Убрал дублирующий .repotsScrollingContainer (с опечаткой) */
 .reportsScrollingContainer {
   margin-top: 3px;
   padding-right: 0.6rem;
