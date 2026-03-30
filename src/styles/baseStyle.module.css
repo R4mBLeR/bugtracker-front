@@ -20,3 +20,13 @@
   font-size: 28px;
   font-weight: 600;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+
+  .lineSeparator {
+    max-width: 95%;
+  }
+}

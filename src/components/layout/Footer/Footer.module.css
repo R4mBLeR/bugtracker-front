@@ -13,4 +13,9 @@
   padding-left: 0.7rem;
   padding-bottom: 0.5rem;
 }
- 
+
+@media (max-width: 900px) {
+  .footer {
+    height: 70px;
+  }
+}

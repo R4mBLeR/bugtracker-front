@@ -3,40 +3,17 @@ import Report from "../../components/common/Report/Report";
 import styles from "./MainPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import photo from "../../assets/game-photo.jpg";
-import Changelog from "../../components/common/Changelog/Changelog";
 import useTitle from "../../hooks/useTitle";
 
 const MainPage = () => {
-  const [changelogsData, setChangelogsData] = useState([]);
   const [reportsData, setReportsData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const API_URL = process.env.REACT_APP_API_URL;
 
     useTitle('Nomo');
 
 
     useEffect(() => {
-    const fetchChangelogs = async () => {
-      try {
-        const response = await fetch(API_URL + "/changelogs");
-        if (response.ok) {
-          const data = await response.json();
-          setChangelogsData(Array.isArray(data) ? data : []);
-        } else {
-          throw new Error(`HTTP ${response.status}`);
-        }
-      } catch (error) {
-        console.warn("Failed to load changelogs:", error);
-        setChangelogsData([
-          {
-            title: "Connection Error",
-            description: "Unable to load changelogs",
-          },
-        ]);
-      }
-    };
-
     const fetchReports = async () => {
       try {
         const response = await fetch(API_URL + "/reports");
@@ -61,10 +38,7 @@ const MainPage = () => {
 
     const fetchData = async () => {
       setLoading(true);
-      setError(null);
-
-      // Запускаем оба запроса параллельно
-      await Promise.all([fetchChangelogs(), fetchReports()]);
+      await fetchReports();
 
       setLoading(false);
     };
@@ -97,26 +71,8 @@ const MainPage = () => {
 
         <div className={baseStyles.lineSeparator}></div>
 
-        <div className={styles.changelogsContainer}>
-          <div className={baseStyles.title}>Changelogs</div>
-          {error && <div className={styles.errorMessage}>Error: {error}</div>}
-          <div className={styles.changelogs}>
-            <div className={styles.changelogsScrollingContainer}>
-              {loading ? (
-                <div className={styles.loading}>Loading changelogs...</div>
-              ) : changelogsData.length === 0 ? (
-                <div className={styles.noData}>No changelogs available</div>
-              ) : (
-                changelogsData.map((changelog, index) => (
-                  <Changelog
-                    key={changelog.id || index}
-                    title={changelog.title}
-                    description={changelog.description}
-                  />
-                ))
-              )}
-            </div>
-          </div>
+        <div className={styles.downloadContainer}>
+          <div className={baseStyles.title}>Download</div>
         </div>
 
         <div className={baseStyles.lineSeparator}></div>

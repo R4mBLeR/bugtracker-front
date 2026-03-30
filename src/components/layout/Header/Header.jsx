@@ -6,7 +6,6 @@ import companyLogo from "../../../assets/companyLogo.png";
 const Header = () => {
   const location = useLocation();
 
-  // Функция проверки активной страницы
   const getActiveClass = (path) => {
     return location.pathname === path ? styles.active : "";
   };
@@ -25,9 +24,9 @@ const Header = () => {
           <a href="/">Main Page</a>
         </div>
         <div
-          className={`${styles.navContainer} ${getActiveClass("/download")}`}
+          className={`${styles.navContainer} ${getActiveClass("/changelogs")}`}
         >
-          <a href="/download">Download</a>
+          <a href="/changelogs">Changelogs</a>
         </div>
         <div className={`${styles.navContainer} ${getActiveClass("/reports")}`}>
           <a href="/reports">Reports</a>

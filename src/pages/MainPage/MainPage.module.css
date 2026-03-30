@@ -46,23 +46,6 @@
   border-radius: 8px;
 }
 
-.changelogsContainer {
-}
-
-.changelogsScrollingContainer {
-  width: 100%;
-  margin-top: 3px;
-  padding-right: 0.6rem;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  transition: scroll-behavior 0.3s ease;
-}
-
-.changelogs {
-  display: flex;
-  max-height: 350px;
-}
-
 .reportsContainer {
   height: 300px;
   margin: auto;
@@ -86,4 +69,37 @@
   padding: 40px;
   color: #666;
   font-size: 16px;
+}
+
+@media (max-width: 768px){
+  .mainPage {
+    background-color: #111010;
+    min-height: 750px;
+  }
+
+  .wrapper {
+    width: 90%;
+  }
+
+  .aboutRow {
+    flex-direction: column;
+  }
+
+  .textColumn {
+    order: 2;
+  }
+
+  .textColumn {
+    order: 1;
+  }
+
+  .reportsContainer {
+    width: 95%;
+  }
+
+  .reportsScrollingContainer {
+    width: 100%;
+    max-height: 220px;
+    padding-right: 0;
+  }
 }

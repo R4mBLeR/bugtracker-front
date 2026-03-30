@@ -9,6 +9,7 @@ import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import ChangelogsPage from "./pages/ChangelogsPage/ChangelogsPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/admin" element={<AdminPanelPage />} />
               <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/changelogs" element={<ChangelogsPage />} />
               <Route path="/reports/:id" element={<ReportPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

@@ -3,15 +3,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "./AdminPanelPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import { useAuth } from "../../context/AuthContext";
-import {Helmet} from "react-helmet";
 import useTitle from "../../hooks/useTitle";
 
 const AdminPanelPage = () => {
   const navigate = useNavigate();
-  const [reportsData, setReportsData] = useState([]);
-  const [isLoading, setisLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isSending, setSending] = useState(false);
@@ -27,7 +22,7 @@ const AdminPanelPage = () => {
       if (!isAuthenticated) {
         navigate("/login");
       }
-    }, 100); // Небольшая задержка для проверки
+    }, 100);
 
     return () => clearTimeout(checkAuth);
   }, [isAuthenticated, navigate]);
@@ -50,8 +45,6 @@ const AdminPanelPage = () => {
 
     try {
       setSending(true);
-      setError(null);
-
       const response = await fetchWithAuth(API_URL + "/changelogs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

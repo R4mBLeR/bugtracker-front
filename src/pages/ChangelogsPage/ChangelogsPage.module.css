@@ -1,8 +1,8 @@
-.reportsPage {
+.changelogsPage {
   min-height: 1000px;
 }
 
-.reportsContainer {
+.changelogsContainer {
   height: 400px;
   margin: auto;
   width: 75%;
@@ -13,7 +13,7 @@
   margin-bottom: 1rem;
 }
 
-.reportsScrollingContainer {
+.changelogsScrollingContainer {
   margin-top: 3px;
   padding-right: 0.6rem;
   overflow-y: auto;
@@ -113,6 +113,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .sendButton:hover {
@@ -126,9 +127,10 @@
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
+
 @media (max-width: 900px) {
-  .reportsContainer {
-    height: 220px;
+  .changelogsContainer {
+    height: 250px;
     margin: auto;
     width: 100%;
     display: flex;
@@ -155,18 +157,5 @@
 
   .sendButton {
     margin-top: 0.9rem;
-  }
-
-  .reportsScrollingContainer {
-    margin-top: 3px;
-    width: 95%;
-    padding-right: 0.6rem;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    transition: scroll-behavior 0.3s ease;
-  }
-
-  .reportsPage {
-    min-height: 750px;
   }
 }

@@ -66,3 +66,15 @@ a {
   font-size: 0.7rem;
   margin-right: 3px;
 }
+
+@media (max-width: 768px) {
+  .reportCard {
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0;
+  }
+
+  .container h3, span{
+    padding-left: 0.3rem;
+  }
+}

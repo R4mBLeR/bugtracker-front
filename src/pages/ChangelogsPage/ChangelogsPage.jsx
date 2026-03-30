@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Report from "../../components/common/Report/Report";
-import styles from "./ReportsPage.module.css";
+import styles from "./ChangelogsPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
 import useTitle from "../../hooks/useTitle";
+import Changelog from "../../components/common/Changelog/Changelog";
 
-const ReportsPage = () => {
-  const [reportsData, setReportsData] = useState([]);
+const ChangelogsPage = () => {
+  const [changelogsData, setChangelogsData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isSending, setSending] = useState(false);
@@ -25,12 +24,11 @@ const ReportsPage = () => {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description, email }),
+        body: JSON.stringify({ title, description }),
       };
-      const response = await fetch(API_URL + "/reports", requestOptions);
-      console.log(API_URL);
+      const response = await fetch(API_URL + "/changelogs", requestOptions);
       if (response.status === 201) {
-        setMessage("The report was sent successfully!");
+        setMessage("The changelog was sent successfully!");
         return;
       }
       if (response.status === 409) {
@@ -39,19 +37,19 @@ const ReportsPage = () => {
       }
       if (!response.ok) {
         const body = await response.json();
-        console.error("Send report error", body);
+        console.error("Send changelog error", body);
         setMessage(body.message[0]);
         return;
       }
     } catch (error) {
-      console.error("Send report error", error);
-      setMessage("Report failed. Please try again.");
+      console.error("Send changelog error", error);
+      setMessage("Changelog failed. Please try again.");
     } finally {
       setSending(false);
     }
   };
 
-    useTitle('Reports');
+    useTitle('Changelogs');
 
 
     useEffect(() => {
@@ -60,19 +58,17 @@ const ReportsPage = () => {
         setisLoading(true);
         setError(null);
 
-        const response = await fetch(API_URL + "/reports");
+        const response = await fetch(API_URL + "/changelogs");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const reportsResponse = await response.json();
+        const changelogsResponse = await response.json();
 
-        // Проверяем, что ответ - массив
-        if (Array.isArray(reportsResponse)) {
-          if (reportsResponse.length === 0) {
-            // Если массив пустой, показываем сообщение
-            setReportsData([
+        if (Array.isArray(changelogsResponse)) {
+          if (changelogsResponse.length === 0) {
+            setChangelogsData([
               {
                 id: 0,
                 title: "No reports available",
@@ -81,12 +77,12 @@ const ReportsPage = () => {
               },
             ]);
           } else {
-            setReportsData(reportsResponse);
+            setChangelogsData(changelogsData);
           }
         } else {
           // Если ответ не массив
-          console.error("API response is not an array:", reportsResponse);
-          setReportsData([
+          console.error("API response is not an array:", changelogsResponse);
+          setChangelogsData([
             {
               id: 0,
               title: "Invalid data format from API",
@@ -98,12 +94,10 @@ const ReportsPage = () => {
       } catch (error) {
         console.error("Ошибка при загрузке отчетов:", error);
         setError(error.message);
-        setReportsData([
+        setChangelogsData([
           {
             id: 0,
             title: "API Connection Error",
-            status: "error",
-            email: "system@admin.com",
           },
         ]);
       } finally {
@@ -116,25 +110,23 @@ const ReportsPage = () => {
 
   return (
     <div className={baseStyles.wrapper}>
-      <div className={styles.reportsPage}>
-        <div className={baseStyles.title}>Reports</div>
+      <div className={styles.changelogs}>
+        <div className={baseStyles.title}>Changelogs</div>
         <div className={baseStyles.lineSeparator}></div>
-        <div className={styles.reportsContainer}>
-          <div className={styles.reportsScrollingContainer}>
+        <div className={styles.changelogsContainer}>
+          <div className={styles.changelogsScrollingContainer}>
             {isLoading ? (
               <div className={styles.isLoading}>isLoading...</div>
             ) : error ? (
               <div className={styles.error}>Error: {error}</div>
-            ) : reportsData.length === 0 ? (
-              <div className={styles.noReports}>No reports found</div>
+            ) : changelogsData.length === 0 ? (
+              <div className={styles.noChangelogs}>No changelogs found</div>
             ) : (
-              reportsData.map((report) => (
-                <Report
-                  key={report.id}
-                  id={report.id}
-                  title={report.title}
-                  status={report.status}
-                  senderEmail={report.email}
+                changelogsData.map((changelog) => (
+                <Changelog
+                  key={changelog.id}
+                  title={changelog.title}
+                  description={changelog.description}
                 />
               ))
             )}
@@ -142,7 +134,7 @@ const ReportsPage = () => {
         </div>
         <div className={baseStyles.lineSeparator}></div>
         <div className={styles.inputForm}>
-          <div className={styles.title}>Create Report</div>
+          <div className={styles.title}>Add Changelog</div>
           <form onSubmit={handleSubmit}>
             <div className={styles.inputField}>
               <label className={styles.label}>Title: </label>
@@ -152,7 +144,7 @@ const ReportsPage = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 required
                 className={styles.input}
-                placeholder="Enter report title"
+                placeholder="Enter changelog title"
               />
             </div>
 
@@ -163,29 +155,16 @@ const ReportsPage = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 className={styles.textarea} // Используем отдельный класс
-                placeholder="Enter report description"
+                placeholder="Enter changelog description"
                 rows={5} // Указываем количество строк
               />
             </div>
-
-            <div className={styles.inputField}>
-              <label className={styles.label}>Email: </label>
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className={styles.input}
-                placeholder="Enter your email"
-              />
-            </div>
-
             <button
               type="submit"
               className={styles.sendButton}
               disabled={isSending}
             >
-              Send report
+              Send changelog
             </button>
             {message && <div className={styles.message}>{message}</div>}
           </form>
@@ -195,4 +174,4 @@ const ReportsPage = () => {
   );
 };
 
-export default ReportsPage;
+export default ChangelogsPage;

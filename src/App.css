@@ -50,3 +50,11 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 900px) {
+  .App {
+    text-align: center;
+    background-color: rgb(17, 14, 14);
+    color: white;
+  }
+}
