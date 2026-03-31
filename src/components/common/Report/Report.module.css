@@ -67,7 +67,7 @@ a {
   margin-right: 3px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .reportCard {
     width: 100%;
     min-width: 0;

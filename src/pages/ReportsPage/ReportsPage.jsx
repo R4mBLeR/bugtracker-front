@@ -7,7 +7,6 @@ import useTitle from "../../hooks/useTitle";
 const ReportsPage = () => {
   const [reportsData, setReportsData] = useState([]);
   const [isLoading, setisLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +20,6 @@ const ReportsPage = () => {
 
     try {
       setSending(true);
-      setError(null);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,7 +56,6 @@ const ReportsPage = () => {
     const fetchData = async () => {
       try {
         setisLoading(true);
-        setError(null);
 
         const response = await fetch(API_URL + "/reports");
 
@@ -83,29 +80,16 @@ const ReportsPage = () => {
           } else {
             setReportsData(reportsResponse);
           }
-        } else {
-          // Если ответ не массив
-          console.error("API response is not an array:", reportsResponse);
-          setReportsData([
-            {
-              id: 0,
-              title: "Invalid data format from API",
-              status: "error",
-              email: "system@admin.com",
-            },
-          ]);
         }
       } catch (error) {
-        console.error("Ошибка при загрузке отчетов:", error);
-        setError(error.message);
-        setReportsData([
-          {
-            id: 0,
-            title: "API Connection Error",
-            status: "error",
-            email: "system@admin.com",
-          },
-        ]);
+          setReportsData([
+              {
+                  id: 1,
+                  title: "Unable to load reports",
+                  status: "open",
+                  email: "system@admin.com",
+              },
+          ]);
       } finally {
         setisLoading(false);
       }
@@ -115,16 +99,14 @@ const ReportsPage = () => {
   }, [API_URL]);
 
   return (
-    <div className={baseStyles.wrapper}>
-      <div className={styles.reportsPage}>
+    <div className={styles.reportsPage}>
+      <div className={baseStyles.wrapper}>
         <div className={baseStyles.title}>Reports</div>
         <div className={baseStyles.lineSeparator}></div>
         <div className={styles.reportsContainer}>
           <div className={styles.reportsScrollingContainer}>
             {isLoading ? (
               <div className={styles.isLoading}>isLoading...</div>
-            ) : error ? (
-              <div className={styles.error}>Error: {error}</div>
             ) : reportsData.length === 0 ? (
               <div className={styles.noReports}>No reports found</div>
             ) : (
