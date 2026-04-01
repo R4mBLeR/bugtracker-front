@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Report from "../../components/common/Report/Report";
 import styles from "./MainPage.module.css";
 import baseStyles from "../../styles/baseStyle.module.css";
@@ -73,6 +73,16 @@ const MainPage = () => {
 
         <div className={styles.downloadContainer}>
           <div className={baseStyles.title}>Download</div>
+            <div className={styles.downloadText}>NOMO is a first-person survival adventure set in a remote northern
+                landscape. After a violent storm, you find yourself stranded on an unknown island. Explore, gather
+                resources, survive the harsh environment, and repair your boat to find your way home.</div>
+            <a className={styles.downloadButton} href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+                <button
+                    title="Download"
+                >
+                    Download
+                </button>
+            </a>
         </div>
 
         <div className={baseStyles.lineSeparator}></div>
