@@ -7,7 +7,10 @@ const Header = () => {
   const location = useLocation();
 
   const getActiveClass = (path) => {
-    return location.pathname === path ? styles.active : "";
+    if (path === "/") {
+      return location.pathname === path ? styles.active : "";
+    }
+    return location.pathname.startsWith(path) ? styles.active : "";
   };
 
   return (

@@ -15,7 +15,7 @@ const ReportsPage = () => {
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
     setMessage("");
 
     try {
@@ -25,10 +25,11 @@ const ReportsPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description, email }),
       };
-      const response = await fetch(API_URL + "/reports", requestOptions);
+      const response = await fetch(API_URL + "/reports/create", requestOptions);
       console.log(API_URL);
       if (response.status === 201) {
         setMessage("The report was sent successfully!");
+        await fetchReports();
         return;
       }
       if (response.status === 409) {
@@ -38,7 +39,7 @@ const ReportsPage = () => {
       if (!response.ok) {
         const body = await response.json();
         console.error("Send report error", body);
-        setMessage(body.message[0]);
+        setMessage(body.message);
         return;
       }
     } catch (error) {
@@ -49,53 +50,53 @@ const ReportsPage = () => {
     }
   };
 
-    useTitle('Reports');
+  useTitle("Reports");
 
+  const fetchReports = async () => {
+    try {
+      setisLoading(true);
 
-    useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setisLoading(true);
+      const response = await fetch(API_URL + "/reports");
 
-        const response = await fetch(API_URL + "/reports");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const reportsResponse = await response.json();
-
-        // Проверяем, что ответ - массив
-        if (Array.isArray(reportsResponse)) {
-          if (reportsResponse.length === 0) {
-            // Если массив пустой, показываем сообщение
-            setReportsData([
-              {
-                id: 0,
-                title: "No reports available",
-                status: "info",
-                email: "system@admin.com",
-              },
-            ]);
-          } else {
-            setReportsData(reportsResponse);
-          }
-        }
-      } catch (error) {
-          setReportsData([
-              {
-                  id: 1,
-                  title: "Unable to load reports",
-                  status: "open",
-                  email: "system@admin.com",
-              },
-          ]);
-      } finally {
-        setisLoading(false);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
 
-    fetchData();
+      const reportsResponse = await response.json();
+
+      if (Array.isArray(reportsResponse)) {
+        if (reportsResponse.length === 0) {
+          setReportsData([
+            {
+              id: 0,
+              title: "No reports available",
+              status: 2,
+              email: "system@admin.com",
+            },
+          ]);
+        } else {
+          const sortedReports = [...reportsResponse].sort((a, b) => {
+            return a.status - b.status;
+          });
+          setReportsData(sortedReports);
+        }
+      }
+    } catch (error) {
+      setReportsData([
+        {
+          id: 1,
+          title: "Unable to load reports",
+          status: 2,
+          email: "system@admin.com",
+        },
+      ]);
+    } finally {
+      setisLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchReports();
   }, [API_URL]);
 
   return (
@@ -144,9 +145,9 @@ const ReportsPage = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
-                className={styles.textarea} // Используем отдельный класс
+                className={styles.textarea}
                 placeholder="Enter report description"
-                rows={5} // Указываем количество строк
+                rows={5}
               />
             </div>
 

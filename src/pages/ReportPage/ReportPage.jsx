@@ -9,21 +9,19 @@ const ReportPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [report, setReport] = useState(null);
-  const [reportStatus, setNewReportStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const API_URL = process.env.REACT_APP_API_URL;
-  const { isAuthenticated, accessToken, refreshToken } = useAuth();
+  const { isAuthenticated, fetchWithAuth } = useAuth();
 
   const ReportStatus = {
-    IN_PROGRESS: "in-progress",
-    CLOSED: "closed",
+    IN_PROGRESS: 1,
+    RESOLVED: 2,
   };
 
-    useTitle('Report #' + id);
+  useTitle("Report #" + id);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const fetchReport = async () => {
       try {
         setLoading(true);
@@ -49,93 +47,81 @@ const ReportPage = () => {
     };
 
     fetchReport();
-  }, [id, navigate]);
+  }, [id, navigate, API_URL]);
 
   const deleteReport = async () => {
-    const requestOptions = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ id }),
-    };
-    const response = await fetch(API_URL + "/reports", requestOptions);
-    const data = await response.json();
-    if (response.status === 401) {
-      const requestOptions = {
-        method: "POST",
+    try {
+      const response = await fetchWithAuth(`${API_URL}/reports/delete`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${refreshToken}`,
         },
-        body: JSON.stringify({ id }),
-      };
-      const response = await fetch(API_URL + "/reports", requestOptions);
+        body: JSON.stringify({ id: parseInt(id) }),
+      });
+
+      if (response.ok) {
+        navigate("/reports");
+      } else {
+        const data = await response.json();
+        setMessage(data.message || "Failed to delete report");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      setMessage("An error occurred while deleting");
     }
-    console.log(response);
-    navigate("/");
   };
 
   const updateReportStatus = async (newStatus) => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ id: id, status: newStatus }),
-    };
-    const response = await fetch(API_URL + "/reports/update", requestOptions);
-    const data = await response.json();
-    if (response.status === 401) {
-      const requestOptions = {
+    try {
+      const response = await fetchWithAuth(`${API_URL}/reports/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${refreshToken}`,
         },
-        body: JSON.stringify({ id }),
-      };
-      const response = await fetch(API_URL + "/reports/update", requestOptions);
-    }
-    if (response.status != 200) {
-      setMessage("Something went wrong");
-      return;
-    }
-    if (newStatus == ReportStatus.CLOSED) {
-      setMessage("Report status is successfull updated to 'Closed'");
-    } else if (newStatus == ReportStatus.IN_PROGRESS) {
-      setMessage("Report status is successfull updated to 'InProgress'");
+        body: JSON.stringify({ id: parseInt(id), status: newStatus }),
+      });
+
+      if (response.ok) {
+        const updatedReport = await response.json();
+        setReport(updatedReport);
+
+        if (newStatus === ReportStatus.RESOLVED) {
+          setMessage("Report status successfully updated to 'Resolved'");
+        } else if (newStatus === ReportStatus.IN_PROGRESS) {
+          setMessage("Report status successfully updated to 'In Progress'");
+        }
+
+        setTimeout(() => setMessage(""), 3000);
+      } else {
+        const data = await response.json();
+        setMessage(data.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Update status error:", error);
+      setMessage("An error occurred while updating status");
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   if (!report) {
     return null;
   }
 
-    return (
+  return (
     <div className={styles.reportPage}>
       <div className={baseStyles.wrapper}>
         <div className={baseStyles.lineSeparator}></div>
-        {loading ? (
-          <div className={styles.loading}>Loading...</div>
-        ) : (
-          <div className={styles.reportWrapper}>
-            <h3 className={styles.reportId}>Report #{report.id}</h3>
-            <div className={styles.reportCard}>
-              <h3 className={styles.reportTitle}>{report.title}</h3>
-              <div className={styles.reportDescription}>
-                {report.description}
-              </div>
-              <div className={styles.reportFooter}>{report.email}</div>
-            </div>
+        <div className={styles.reportWrapper}>
+          <h3 className={styles.reportId}>Report #{report.id}</h3>
+          <div className={styles.reportCard}>
+            <h3 className={styles.reportTitle}>{report.title}</h3>
+            <div className={styles.reportDescription}>{report.description}</div>
+            <div className={styles.reportFooter}>{report.email}</div>
           </div>
-        )}
+        </div>
 
         {isAuthenticated && (
           <div className={styles.adminPanel}>
@@ -149,20 +135,20 @@ const ReportPage = () => {
               </button>
               <button
                 onClick={() => updateReportStatus(ReportStatus.IN_PROGRESS)}
-                title='Set "inProgress" status'
+                title='Set "In Progress" status'
                 className={`${styles.button} ${styles.updateButton}`}
               >
-                Set InProgress Status
+                Set In Progress Status
               </button>
               <button
-                onClick={() => updateReportStatus(ReportStatus.CLOSED)}
+                onClick={() => updateReportStatus(ReportStatus.RESOLVED)}
                 title="Close Report"
                 className={`${styles.button} ${styles.closeButton}`}
               >
-                Close Report
+                Resolve Report
               </button>
             </div>
-            <div className={styles.adminMessage}>{message}</div>
+            {message && <div className={styles.adminMessage}>{message}</div>}
           </div>
         )}
       </div>

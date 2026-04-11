@@ -107,14 +107,12 @@ export const AuthProvider = ({ children }) => {
       return newAccessToken;
     } catch (error) {
       console.error("Token refresh error:", error);
-      logout(); // Если не удалось обновить токен, разлогиниваем пользователя
+      logout();
       throw error;
     }
   };
 
-  // Универсальная функция для запросов с автообновлением токена
   const fetchWithAuth = async (url, options = {}) => {
-    // Добавляем токен к запросу
     const makeRequest = (token) => {
       return fetch(url, {
         ...options,
@@ -128,9 +126,7 @@ export const AuthProvider = ({ children }) => {
     try {
       let response = await makeRequest();
 
-      // Если токен истек
       if (response.status === 401) {
-        // Если уже идет обновление токена, добавляем запрос в очередь
         if (isRefreshing) {
           return new Promise((resolve, reject) => {
             setPendingRequests((prev) => [
@@ -140,20 +136,17 @@ export const AuthProvider = ({ children }) => {
           });
         }
 
-        // Начинаем обновление токена
         setIsRefreshing(true);
 
         try {
           const newToken = await refreshAccessToken();
           setIsRefreshing(false);
 
-          // Повторяем все запросы из очереди с новым токеном
           pendingRequests.forEach(({ resolve, reject, url, options }) => {
             fetchWithAuth(url, options).then(resolve).catch(reject);
           });
           setPendingRequests([]);
 
-          // Повторяем текущий запрос с новым токеном
           response = await makeRequest(newToken);
         } catch (refreshError) {
           setIsRefreshing(false);

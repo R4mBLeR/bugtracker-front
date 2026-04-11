@@ -13,7 +13,6 @@ a {
 .wrapper {
   display: flex;
   flex-direction: column;
-
 }
 
 .container {
@@ -74,7 +73,8 @@ a {
     padding: 0.7rem 0;
   }
 
-  .container h3, span{
+  .container h3,
+  span {
     padding-left: 0.3rem;
   }
 }

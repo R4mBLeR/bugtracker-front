@@ -1,25 +1,40 @@
 .changelogContainer {
   width: 65%;
   text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 0.2rem;
+  margin-left: 0.6rem;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContainer button {
+  text-align: center;
+  width: 35px;
+  height: 23px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  cursor: pointer;
 }
 
 .changelogTitle {
   font-weight: 600;
   font-size: 24px;
   padding-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 3px;
 }
 
-.changelogInfo {
+.changelogText {
   font-size: 15px;
-  margin-top: 10px;
+  white-space: pre-wrap;
 }
 
 @media (max-width: 900px) {
-
-    .changelogContainer {
-        margin-left: 0.6rem;
-    }
+  .changelogContainer {
+    margin-left: 0.6rem;
+  }
 }
-
