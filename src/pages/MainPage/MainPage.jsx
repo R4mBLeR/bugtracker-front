@@ -20,7 +20,7 @@ const MainPage = () => {
           const data = await response.json();
           setReportsData(Array.isArray(data) ? data : []);
         } else {
-          throw new Error(`HTTP ${response.status}`);
+          throw new Error(`HTTP ${response.message}`);
         }
       } catch (error) {
         console.warn("Failed to load reports:", error);
