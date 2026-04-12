@@ -17,8 +17,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             set -e
-
-            cd /bugtracker/bugtracker-front
+            cd bugtracker/bugtracker-front
             git fetch origin prod
             git reset --hard origin/prod
 
