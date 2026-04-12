@@ -22,4 +22,6 @@ jobs:
             git reset --hard origin/prod
 
             cd ..
-            docker compose up -d --build
+            docker compose up -d --build bugtracker-front
+
+            docker image prune -f
