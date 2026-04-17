@@ -60,6 +60,7 @@
   margin-top: 3px;
   padding-right: 0.6rem;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   transition: scroll-behavior 0.3s ease;
 }
@@ -72,40 +73,40 @@
 }
 
 .downloadContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .downloadText {
-    width: 50%;
-    text-align: left;
+  width: 50%;
+  text-align: left;
 }
 
 .downloadButton {
-    text-align: left;
-    margin: 0.2rem;
-    width: 30%;
+  text-align: left;
+  margin: 0.2rem;
+  width: 30%;
 }
 .downloadButton button {
-    width: 100%;
-    height: 4rem;
-    background-color: rgb(38, 74, 10);
-    justify-content: center;
-    align-items: center;
-    border: none;
-    font-size: 35px;
-    font-weight: bold;
-    color: white;
-    border-radius: 0.1rem;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  height: 4rem;
+  background-color: rgb(38, 74, 10);
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  border-radius: 0.1rem;
+  transition: background-color 0.3s ease;
 }
 
 .downloadButton button:hover {
-    cursor: pointer;
-    background-color: rgb(28, 57, 6);
+  cursor: pointer;
+  background-color: rgb(28, 57, 6);
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
   .mainPage {
     background-color: #111010;
     min-height: 750px;
@@ -137,19 +138,18 @@
     padding-right: 0;
   }
 
+  .downloadText {
+    width: 90%;
+    margin: auto;
+  }
 
-    .downloadText {
-        width: 90%;
-        margin:auto;
-    }
+  .downloadButton {
+    width: 70%;
+    margin: 0.6rem auto;
+  }
 
-    .downloadButton {
-        width: 70%;
-        margin:0.6rem auto;
-    }
-
-    .downloadButton button {
-        font-size: 25px;
-        text-align: center;
-    }
+  .downloadButton button {
+    font-size: 25px;
+    text-align: center;
+  }
 }
