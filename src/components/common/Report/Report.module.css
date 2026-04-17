@@ -39,8 +39,8 @@ a {
 }
 
 .status.in-progress {
-  background: #007aff20;
-  color: #007aff;
+  background: #ff9f0a20; /* Apple orange с 20% прозрачности */
+  color: #ff9f0a;
 }
 
 .status.resolved {
