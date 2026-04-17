@@ -154,8 +154,10 @@ const ReportsPage = () => {
             <div className={styles.inputField}>
               <label className={styles.label}>Email: </label>
               <input
-                type="text"
+                type="email"
+                name="email"
                 value={email}
+                autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className={styles.input}
