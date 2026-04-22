@@ -68,9 +68,9 @@ a {
 
 @media (max-width: 900px) {
   .reportCard {
-    width: 100%;
+    width: 98%;
     min-width: 0;
-    margin: 0;
+    margin: 0.25rem auto;
     padding: 0.7rem 0;
   }
 
